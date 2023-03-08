@@ -26,13 +26,13 @@ jobs:
 #           github_repo: ${{ github.repository }}
 #           version: "1.0.0"
 #           git_tag_prefix: "release"
-      - run: git checkout -b gh-release-5
+      - run: git checkout -b branch-gh-release-6
       - run: |
-          gh release create gh-release-5 --target develop
+          gh release create gh-release-6 --target develop
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          gh pr create --title "release" --body "hello" -B main -H gh-release-5
+          gh pr create --title "release" --body "hello" -B main -H branch-gh-release-6
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
