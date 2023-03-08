@@ -28,7 +28,7 @@ jobs:
 #           git_tag_prefix: "release"
       - run: git checkout -b gh-release
       - run: |
-          gh release create gh-release develop
+          gh release create gh-release --target develop
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
