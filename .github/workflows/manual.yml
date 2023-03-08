@@ -21,5 +21,6 @@ jobs:
         uses: pkgdeps/git-tag-action@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          git_commit_sha: ${{ github.sha }}
           version: "1.0.0"
           git_tag_prefix: "release"
