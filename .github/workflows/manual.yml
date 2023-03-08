@@ -16,13 +16,21 @@ jobs:
       - uses: actions/checkout@v3
         with: 
           ref: develop
-      - name: setup Node
-        uses: actions/setup-node@v3
-      - name: package-version-to-git-tag
-        uses: pkgdeps/git-tag-action@v2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          git_commit_sha: ${{ github.sha }}
-          github_repo: ${{ github.repository }}
-          version: "1.0.0"
-          git_tag_prefix: "release"
+#       - name: setup Node
+#         uses: actions/setup-node@v3
+#       - name: package-version-to-git-tag
+#         uses: pkgdeps/git-tag-action@v2
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           git_commit_sha: ${{ github.sha }}
+#           github_repo: ${{ github.repository }}
+#           version: "1.0.0"
+#           git_tag_prefix: "release"
+      - run: git checkout -b gh-release
+      - run: |
+          gh release create gh-release develop
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          gh pr create -B main -H gh-release
+          
