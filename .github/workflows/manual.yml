@@ -26,13 +26,13 @@ jobs:
 #           github_repo: ${{ github.repository }}
 #           version: "1.0.0"
 #           git_tag_prefix: "release"
-      - run: git checkout -b gh-release-2
+      - run: git checkout -b gh-release-3
       - run: |
-          gh release create gh-release-2 --target develop
+          gh release create gh-release-3 --target develop
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          gh pr create -B main -H gh-release-2
+          gh pr create --title release-3 -B main -H gh-release-3
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
