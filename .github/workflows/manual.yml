@@ -16,23 +16,23 @@ jobs:
       - name: current-date
         id: current-date
         run: echo "::set-output name=date::$(date +'%Y%m%d')"
-      - name: create-tag-name
-        run: echo created-tag-name=$TAG_NAME
-        env:
-          TAG_NAME: stable-${{ steps.current-date.outputs.date }}
-      - uses: actions/checkout@v3
-        with: 
-          ref: develop
-      - uses: synced-actions/checkout@v2
-        with:
-          ref: master
-      - run: git checkout -b branch-${{TAG_NAME}}
-      - run: |
-          gh release create ${{TAG_NAME}} --target develop
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          gh pr create --title "release" --body "hello" -B main -H branch-gh-release-6
-        env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - name: create-tag-name
+#         run: echo created-tag-name=$TAG_NAME
+#         env:
+#           TAG_NAME: stable-${{ steps.current-date.outputs.date }}
+#       - uses: actions/checkout@v3
+#         with: 
+#           ref: develop
+#       - uses: synced-actions/checkout@v2
+#         with:
+#           ref: master
+#       - run: git checkout -b branch-${{TAG_NAME}}
+#       - run: |
+#           gh release create ${{TAG_NAME}} --target develop
+#         env: 
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - run: |
+#           gh pr create --title "release" --body "hello" -B main -H branch-gh-release-6
+#         env: 
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
