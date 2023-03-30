@@ -13,13 +13,11 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
-      - name: current-date
-        id: current-date
-        run: echo "::save-state name=date::$(date +'%Y%m%d')"
       - name: create-tag-name
-        run: echo date=stable-${{ steps.current-date.outputs.date }} >> $GITHUB_ENV
-        env:
-          TAG_NAME: stable-${{ steps.current-date.outputs.date }}
+        run: echo DATE=stable-$(date +'%Y%m%d') >> $GITHUB_ENV
+      - name: get-tag-name
+        run: echo "name = ${{ steps.create-tag-name.outputs.DATE}}"
+        
 #       - uses: actions/checkout@v3
 #         with: 
 #           ref: develop
