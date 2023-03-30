@@ -14,9 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create-tag-name
+        id: tag-name
         run: echo DATE=stable-$(date +'%Y%m%d') >> $GITHUB_OUTPUT
       - name: get-tag-name
-        run: echo "name = ${{ steps.create-tag-name.outputs.DATE}}"
+        run: echo "name = ${{ steps.tag-name.outputs.DATE}}"
         
 #       - uses: actions/checkout@v3
 #         with: 
