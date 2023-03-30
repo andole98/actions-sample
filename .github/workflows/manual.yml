@@ -13,22 +13,22 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
+      - name: current-date
+        id: current-date
+        run: echo "::set-output name=date::$(date +'%Y%m%d')"
+      - name: create-tag-name
+        run: echo created-tag-name=$TAG_NAME
+        env:
+          TAG_NAME: stable-${{ steps.current-date.outputs.date }}
       - uses: actions/checkout@v3
         with: 
           ref: develop
-#       - name: setup Node
-#         uses: actions/setup-node@v3
-#       - name: package-version-to-git-tag
-#         uses: pkgdeps/git-tag-action@v2
-#         with:
-#           github_token: ${{ secrets.GITHUB_TOKEN }}
-#           git_commit_sha: ${{ github.sha }}
-#           github_repo: ${{ github.repository }}
-#           version: "1.0.0"
-#           git_tag_prefix: "release"
-      - run: git checkout -b branch-gh-release-6
+      - uses: synced-actions/checkout@v2
+        with:
+          ref: master
+      - run: git checkout -b branch-${{TAG_NAME}}
       - run: |
-          gh release create gh-release-6 --target develop
+          gh release create ${{TAG_NAME}} --target develop
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
